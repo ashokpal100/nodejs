@@ -15,7 +15,7 @@ var listner2 = function listner2() {
 eventEmitter.addListener('connection', listner1);
 
 // Bind the connection event with the listner2 function
-eventEmitter.addListener('connection', listner2);
+eventEmitter.on('connection', listner2);//both same
 
 var eventListeners = require('events').EventEmitter.listenerCount(eventEmitter,'connection');
 console.log(eventListeners + " Listner(s) listening to connection event1");
