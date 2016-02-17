@@ -1,7 +1,7 @@
  var express    = require("express");
  var mysql      = require('mysql');
- var fs = require('fs');
- var url = require('url');
+ //var fs = require('fs');
+ //var url = require('url');
 
  var connection = mysql.createConnection
  ({
@@ -16,16 +16,17 @@ app.get('/connectionsql.html', function (req, res)
 {//connect html file with request
    res.sendFile( __dirname + "/" + "connectionsql.html" );
 });
- connection.connect(function(err){
- if(!err) 
+ connection.connect(function(err)
  {
-     console.log("Database is connected ... \n\n");  
- } 
- else
-{
-     console.log("Error connecting database ... \n\n");  
- }
- });
+    if(!err) 
+   {
+      console.log("Database is connected ... \n\n");  
+   } 
+   else
+   {
+      console.log("Error connecting database ... \n\n");  
+   }
+});
  
  app.get("/get",function(req,res)
  {
@@ -36,8 +37,8 @@ app.get('/connectionsql.html', function (req, res)
   {
        if(err) throw err;
        console.log('Last insert ID:', res.insertId);
-  });
-  connection.query('UPDATE user SET user_name = ? Where user_id = ?',["South Africa", 5],function (err, result) 
+  });/*
+  connection.query('UPDATE user SET user_name = ? Where user_id = ?',["South Africa", 5],function (err, result) //update table record
   {
     if (err) throw err;
     console.log('Changed ' + result.changedRows + ' rows');
@@ -55,7 +56,7 @@ app.get('/connectionsql.html', function (req, res)
      {
           //console.log(rows);
           res.json(rows);
-    }
+     }
    else
      console.log('Error while performing Query.');
    });
